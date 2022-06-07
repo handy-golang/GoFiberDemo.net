@@ -30,7 +30,6 @@ func Start() {
 	}))
 
 	app.Get("/", midst.Index("欢迎访问 GoFiberDemo.net 服务"))
-
 	// api
 	api := app.Group("/api")
 	api.Get("/", midst.Index("欢迎访问 /api "))
