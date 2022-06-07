@@ -14,6 +14,6 @@ func Router(api fiber.Router) {
 
 	r.Get("", midst.Index("正在访问 /api/public "))
 
-	r.Get("/ping", midst.GetPing)
-	r.Post("/ping", midst.PostPing)
+	r.Get("/ping", midst.Ping)
+	r.Post("/ping", midst.Ping)
 }

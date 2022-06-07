@@ -7,15 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetPing(c *fiber.Ctx) error {
-	return PingAction(c)
-}
-
-func PostPing(c *fiber.Ctx) error {
-	return PingAction(c)
-}
-
-func PingAction(c *fiber.Ctx) error {
+func Ping(c *fiber.Ctx) error {
 	json := mFiber.DataParser(c)
 
 	ReturnData := make(map[string]any)

@@ -34,8 +34,8 @@ func Start() {
 	// api
 	api := app.Group("/api")
 	api.Get("/", midst.Index("欢迎访问 /api "))
-	api.Get("/ping", midst.GetPing)
-	api.Post("/ping", midst.PostPing)
+	api.Get("/ping", midst.Ping)
+	api.Post("/ping", midst.Ping)
 
 	// public
 	public.Router(api)
