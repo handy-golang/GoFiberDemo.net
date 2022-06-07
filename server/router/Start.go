@@ -20,7 +20,6 @@ func Start() {
 
 	app := fiber.New(fiber.Config{
 		ServerHeader: "GoFiberDemo.net",
-		GETOnly:      true,
 	})
 	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${path} ${latency} \n",
@@ -32,7 +31,8 @@ func Start() {
 
 	// api
 	api := app.Group("/api")
-	api.Get("", midst.Index("欢迎访问 /api "))
+	api.Get("/ping", midst.GetPing)
+	api.Post("/ping", midst.GetPing)
 
 	// public
 	public.Router(api)
