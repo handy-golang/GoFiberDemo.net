@@ -21,6 +21,8 @@ func Start() {
 	app := fiber.New(fiber.Config{
 		ServerHeader: "GoFiberDemo.net",
 	})
+
+	// 日志中间件
 	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${path} ${latency} \n",
 		TimeFormat: "2006-01-02 - 15:04:05",
@@ -31,8 +33,9 @@ func Start() {
 
 	// api
 	api := app.Group("/api")
+	api.Get("/", midst.Index("欢迎访问 /api "))
 	api.Get("/ping", midst.GetPing)
-	api.Post("/ping", midst.GetPing)
+	api.Post("/ping", midst.PostPing)
 
 	// public
 	public.Router(api)
@@ -40,6 +43,7 @@ func Start() {
 	// private
 	private.Router(api)
 
-	global.Log.Println(mStr.Join(`启动服务: http://localhost:`, config.AppEnv.Port))
-	app.Listen(mStr.Join(":", config.AppEnv.Port))
+	listenHost := mStr.Join(":", config.AppEnv.Port)
+	global.Log.Println(mStr.Join(`启动服务: http://127.0.0.1`, listenHost))
+	app.Listen(listenHost)
 }
