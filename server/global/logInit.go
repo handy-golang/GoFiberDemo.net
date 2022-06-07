@@ -32,7 +32,7 @@ func LogInt() {
 		ClearTime: mTime.UnixTimeInt64.Day * 10,
 	})
 
-	// 将方法重载到 config 内部
+	// 将方法重载到 config 内部,便于执行
 	config.LogErr = LogErr
 }
 
