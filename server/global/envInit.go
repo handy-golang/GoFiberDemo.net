@@ -15,7 +15,7 @@ func SysEnvInt() {
 	if isHomeEnvFile || isAppEnvFile {
 		//
 	} else {
-		errStr := fmt.Errorf("没找到 server_env.yaml 配置文件")
+		errStr := fmt.Errorf("没找到 sys_env.yaml 配置文件")
 		LogErr(errStr)
 		panic(errStr)
 	}
@@ -26,7 +26,7 @@ func SysEnvInt() {
 		config.LoadSysEnv(config.File.SysEnv)
 	}
 
-	Log.Println("加载 ServerEnv : ", mJson.JsonFormat(mJson.ToJson(config.SysEnv)))
+	Log.Println("加载 SysEnv : ", mJson.JsonFormat(mJson.ToJson(config.SysEnv)))
 }
 
 func AppEnvInt() {
