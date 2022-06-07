@@ -4,10 +4,12 @@ import (
 	"os"
 	"time"
 
+	"GoFiberDemo.net/server/global"
 	"GoFiberDemo.net/server/global/config"
 	"GoFiberDemo.net/server/router/midst"
 	"GoFiberDemo.net/server/router/private"
 	"GoFiberDemo.net/server/router/public"
+	"github.com/EasyGolang/goTools/mStr"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
@@ -18,6 +20,7 @@ func Start() {
 
 	app := fiber.New(fiber.Config{
 		ServerHeader: "GoFiberDemo.net",
+		GETOnly:      true,
 	})
 	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${path} ${latency} \n",
@@ -37,5 +40,6 @@ func Start() {
 	// private
 	private.Router(api)
 
-	app.Listen(":3000")
+	global.Log.Println(mStr.Join(`启动服务: http://localhost:`, config.AppEnv.Port))
+	app.Listen(mStr.Join(":", config.AppEnv.Port))
 }
