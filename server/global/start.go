@@ -9,7 +9,7 @@ import (
 
 func Start() {
 	// 初始化目录列表
-	config.PathInit()
+	config.DirInit()
 
 	// 初始化日志系统 保证日志可用
 	mCycle.New(mCycle.Opt{

@@ -8,13 +8,9 @@ import (
 	"github.com/EasyGolang/goTools/mPath"
 )
 
-/* ==================================================================== */
-/* ================= ServerEnv ================= */
-/* ==================================================================== */
-
-func ServerEnvInt() {
-	isAppEnvFile := mPath.Exists(config.File.AppServerEnv)
-	isHomeEnvFile := mPath.Exists(config.File.ServerEnv)
+func SysEnvInt() {
+	isAppEnvFile := mPath.Exists(config.File.AppSysEnv)
+	isHomeEnvFile := mPath.Exists(config.File.SysEnv)
 
 	if isHomeEnvFile || isAppEnvFile {
 		//
@@ -25,10 +21,24 @@ func ServerEnvInt() {
 	}
 
 	if isAppEnvFile {
-		config.LoadServerEnv(config.File.AppServerEnv)
+		config.LoadSysEnv(config.File.AppSysEnv)
 	} else {
-		config.LoadServerEnv(config.File.ServerEnv)
+		config.LoadSysEnv(config.File.SysEnv)
 	}
 
-	Log.Println("加载 ServerEnv : ", mJson.JsonFormat(mJson.ToJson(config.ServerEnv)))
+	Log.Println("加载 ServerEnv : ", mJson.JsonFormat(mJson.ToJson(config.SysEnv)))
+}
+
+func AppEnvInt() {
+	// 检查配置文件在不在
+	isUserEnvPath := mPath.Exists(config.File.AppEnv)
+	if isUserEnvPath {
+		config.LoadAppEnv()
+	}
+
+	if config.AppEnv.Port < 80 {
+		config.AppEnv.Port = 9876
+	}
+
+	Log.Println("加载 AppEnv : ", mJson.JsonFormat(mJson.ToJson(config.AppEnv)))
 }

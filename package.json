@@ -1,5 +1,5 @@
 {
-  "name": "hunter_data_center-net",
+  "name": "go-fiber-demo",
   "version": "0.2.3",
   "scripts": {
     "git": "./_shell/gitSet.sh",

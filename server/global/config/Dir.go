@@ -7,19 +7,23 @@ import (
 	"github.com/EasyGolang/goTools/mStr"
 )
 
-var Dir struct {
+type DirType struct {
 	Home string // Home 根目录
 	App  string // APP 根目录
 	Log  string // 日志文件目录
 }
 
-var File struct {
-	ServerEnv    string // /root/server_env.yaml
-	AppServerEnv string // ./server_env.yaml
-	UserConfig   string // ./user_config.yaml
+var Dir DirType
+
+type FileType struct {
+	SysEnv    string // /root/sys_env.yaml
+	AppSysEnv string // ./sys_env.yaml
+	AppEnv    string // ./app_env.yaml
 }
 
-func PathInit() {
+var File FileType
+
+func DirInit() {
 	Dir.Home = mPath.HomePath()
 
 	Dir.App, _ = os.Getwd()
@@ -30,19 +34,19 @@ func PathInit() {
 		"logs",
 	)
 
-	File.ServerEnv = mStr.Join(
+	File.SysEnv = mStr.Join(
 		Dir.Home,
 		mStr.ToStr(os.PathSeparator),
-		"server_env.yaml",
+		"sys_env.yaml",
 	)
-	File.AppServerEnv = mStr.Join(
+	File.AppSysEnv = mStr.Join(
 		Dir.App,
 		mStr.ToStr(os.PathSeparator),
-		"server_env.yaml",
+		"sys_env.yaml",
 	)
-	File.UserConfig = mStr.Join(
+	File.AppEnv = mStr.Join(
 		Dir.App,
 		mStr.ToStr(os.PathSeparator),
-		"user_config.yaml",
+		"app_env.yaml",
 	)
 }

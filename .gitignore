@@ -13,7 +13,7 @@ package-lock.json
 
 *.sum
 
-server_env.yaml
+sys_env.yaml
 
 node_modules
 
