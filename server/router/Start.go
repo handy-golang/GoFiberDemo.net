@@ -16,7 +16,9 @@ func Start() {
 	fileName := config.Dir.Log + "/HTTP-" + time.Now().Format("06年1月02日15时") + ".log"
 	logFile, _ := os.Create(fileName)
 
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		ServerHeader: "GoFiberDemo.net",
+	})
 	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${path} ${latency} \n",
 		TimeFormat: "2006-01-02 - 15:04:05",

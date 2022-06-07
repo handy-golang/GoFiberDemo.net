@@ -13,6 +13,7 @@ func GetPing(c *fiber.Ctx) error {
 
 func PostPing(c *fiber.Ctx) error {
 	json := make(map[string]string)
+	c.QueryString()
 
 	return PingAction(c, json)
 }
