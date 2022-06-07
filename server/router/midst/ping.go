@@ -5,21 +5,21 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetPing(c *fiber.Ctx) {
+func GetPing(c *fiber.Ctx) error {
 	json := make(map[string]string)
 
-	PingAction(c, json)
+	return PingAction(c, json)
 }
 
-func PostPing(c *fiber.Ctx) {
+func PostPing(c *fiber.Ctx) error {
 	json := make(map[string]string)
 
-	PingAction(c, json)
+	return PingAction(c, json)
 }
 
-func PingAction(c *fiber.Ctx, json map[string]string) {
+func PingAction(c *fiber.Ctx, json map[string]string) error {
 	ReturnData := make(map[string]any)
 	ReturnData["ResParam"] = json
 
-	c.JSON(res.OK.WithData(ReturnData))
+	return c.JSON(res.OK.WithData(ReturnData))
 }

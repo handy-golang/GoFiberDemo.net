@@ -1,8 +1,6 @@
 package midst
 
 import (
-	"fmt"
-
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/gofiber/fiber/v2"
 )
@@ -17,8 +15,6 @@ func Index(Content string) func(*fiber.Ctx) error {
 	}
 
 	Str := mStr.Temp(TempStr, dev)
-
-	fmt.Println(Str)
 
 	return func(c *fiber.Ctx) error {
 		c.Set("Content-Type", "text/html; charset=utf-8")
