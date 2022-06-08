@@ -16,9 +16,9 @@ type DirType struct {
 var Dir DirType
 
 type FileType struct {
-	SysEnv    string // /root/sys_env.yaml
-	AppSysEnv string // ./sys_env.yaml
-	AppEnv    string // ./app_env.yaml
+	SysEnv      string // /root/sys_env.yaml
+	LocalSysEnv string // ./sys_env.yaml
+	AppEnv      string // ./app_env.yaml
 }
 
 var File FileType
@@ -39,7 +39,7 @@ func DirInit() {
 		mStr.ToStr(os.PathSeparator),
 		"sys_env.yaml",
 	)
-	File.AppSysEnv = mStr.Join(
+	File.LocalSysEnv = mStr.Join(
 		Dir.App,
 		mStr.ToStr(os.PathSeparator),
 		"sys_env.yaml",

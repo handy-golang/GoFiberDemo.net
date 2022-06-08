@@ -9,7 +9,7 @@ import (
 )
 
 func SysEnvInt() {
-	isAppEnvFile := mPath.Exists(config.File.AppSysEnv)
+	isAppEnvFile := mPath.Exists(config.File.LocalSysEnv)
 	isHomeEnvFile := mPath.Exists(config.File.SysEnv)
 
 	if isHomeEnvFile || isAppEnvFile {
@@ -21,7 +21,7 @@ func SysEnvInt() {
 	}
 
 	if isAppEnvFile {
-		config.LoadSysEnv(config.File.AppSysEnv)
+		config.LoadSysEnv(config.File.LocalSysEnv)
 	} else {
 		config.LoadSysEnv(config.File.SysEnv)
 	}
