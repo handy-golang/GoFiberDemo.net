@@ -15,14 +15,18 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/template/html"
 )
 
 func Start() {
 	fileName := config.Dir.Log + "/HTTP-" + time.Now().Format("06年1月02日15时") + ".log"
 	logFile, _ := os.Create(fileName)
 
+	engine := html.New("server/tmpl", ".html")
+
 	app := fiber.New(fiber.Config{
 		ServerHeader: "GoFiberDemo.net",
+		Views:        engine,
 	})
 
 	// 日志中间件
@@ -32,10 +36,8 @@ func Start() {
 		Output:     logFile,
 	}))
 
-	// 静态文件服务器
-	app.Use("/", filesystem.New(filesystem.Config{
-		Root: http.FS(tmpl.Static),
-	}))
+	// 模板渲染样例
+	app.Get("/", Index)
 
 	// api
 	api := app.Group("/api")
@@ -47,6 +49,11 @@ func Start() {
 
 	// private
 	private.Router(api)
+
+	// 静态文件服务器
+	app.Use("/", filesystem.New(filesystem.Config{
+		Root: http.FS(tmpl.Static),
+	}))
 
 	listenHost := mStr.Join(":", config.AppEnv.Port)
 	global.Log.Println(mStr.Join(`启动服务: http://127.0.0.1`, listenHost))

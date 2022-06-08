@@ -1,0 +1,29 @@
+package router
+
+import (
+	"GoFiberDemo.net/server/global/config"
+	"github.com/gofiber/fiber/v2"
+)
+
+func Index(c *fiber.Ctx) error {
+	// Render index
+	return c.Render("index/index.tmpl", fiber.Map{
+		"Title":   "GoFiberDemo.net",
+		"AppInfo": config.AppInfo,
+		"BtnList": []struct {
+			Name string
+			ID   int
+		}{
+			{
+				Name: "按钮1",
+				ID:   1,
+			}, {
+				Name: "按钮2",
+				ID:   2,
+			}, {
+				Name: "按钮3",
+				ID:   3,
+			},
+		},
+	})
+}

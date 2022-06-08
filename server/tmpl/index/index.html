@@ -46,8 +46,8 @@
 
 <body>
   <h1 class="title">
-    ShellHooks.net
-    <a class="pure-menu-link version" href="https://github.com/EasyGolang/ShellHooks.net" target="_blank">
+    {{.Title}}
+    <a class="pure-menu-link version" href="https://github.com/EasyGolang/GoFiberDemo.net" target="_blank">
       <svg
         class="icon"
         viewBox="0 0 1024 1024"
@@ -62,7 +62,7 @@
           p-id="2479"
         ></path>
       </svg>
-      当前运行版本: {{.AppPackage.Version}}
+      当前运行版本: {{.AppInfo.Version}}
     </a>
   </h1>
 
@@ -76,20 +76,18 @@
   <br />
 
   <div>
-    {{ range $i, $v := .ShellList }}
+    {{ range $i, $v := .BtnList }}
     <div>
       <button class="runShellBtn pure-button pure-button-primary" key="{{$v.ID}}">{{ $v.Name }}</button>
     </div>
     {{ end }}
   </div>
 
-  <h3>脚本执行结果:</h3>
+  <h3>请求结果:</h3>
   <div id="res">
     <div id="resMsg"></div>
     <div id="resData"></div>
   </div>
-
-  {{template "public/ReStart.tmpl" .}}
 </body>
 <script type="module">
   $('.runShellBtn').on('click', HandleShell);
@@ -99,25 +97,23 @@
     const password = $('#password').val();
 
     this.disabled = true;
-
-    $('#resMsg').html('脚本执行中。。。');
+    $('#resMsg').html('请求发送中...');
     $('#resData').html('');
-
     $('#res').css('border-color', 'cornflowerblue');
-
     http
       .ajax({
-        url: '/api/public/shell_run',
+        url: '/api/public/ping',
         data: {
           Password: window.mo7Encrypt(password),
-          ShellID: Number(key),
+          BtnID: key,
         },
         method: 'post',
       })
       .then((res) => {
         const data = res.data;
+
         $('#resMsg').html(data.Msg);
-        $('#resData').html(data.Data);
+        $('#resData').html(JSON.stringify(data.Data));
 
         if (data.Code > 0) {
           this.disabled = false;
