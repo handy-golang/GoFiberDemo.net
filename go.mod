@@ -3,8 +3,9 @@ module GoFiberDemo.net
 go 1.18
 
 require (
-	github.com/EasyGolang/goTools v0.10.1
+	github.com/EasyGolang/goTools v0.11.1
 	github.com/gofiber/fiber/v2 v2.34.0
+	github.com/gofiber/template v1.6.28
 	github.com/json-iterator/go v1.1.12
 	github.com/spf13/viper v1.12.0
 )
@@ -12,7 +13,8 @@ require (
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
-	github.com/gofiber/template v1.6.28 // indirect
+	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/klauspost/compress v1.15.6 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
