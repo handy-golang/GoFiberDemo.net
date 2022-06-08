@@ -19,11 +19,16 @@ import (
 )
 
 func Start() {
+	// 加载日志文件
 	fileName := config.Dir.Log + "/HTTP-" + time.Now().Format("06年1月02日15时") + ".log"
 	logFile, _ := os.Create(fileName)
+	/*
+		加载模板
+		https://www.gouguoyin.cn/posts/10103.html
+	*/
+	engine := html.NewFileSystem(http.FS(tmpl.Static), ".html")
 
-	engine := html.New("server/tmpl", ".html")
-
+	// 创建服务
 	app := fiber.New(fiber.Config{
 		ServerHeader: "GoFiberDemo.net",
 		Views:        engine,
@@ -31,7 +36,7 @@ func Start() {
 
 	// 日志中间件
 	app.Use(logger.New(logger.Config{
-		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${path} ${latency} \n",
+		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${latency} ${path} \n",
 		TimeFormat: "2006-01-02 - 15:04:05",
 		Output:     logFile,
 	}))
