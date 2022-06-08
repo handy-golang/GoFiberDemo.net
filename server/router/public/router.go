@@ -14,4 +14,6 @@ func Router(api fiber.Router) {
 
 	r.Get("/ping", midst.Ping)
 	r.Post("/ping", midst.Ping)
+
+	r.Post("/generate_token", GenerateToken)
 }

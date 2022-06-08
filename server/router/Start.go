@@ -13,7 +13,10 @@ import (
 	"GoFiberDemo.net/server/tmpl"
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/template/html"
 )
@@ -33,13 +36,15 @@ func Start() {
 		ServerHeader: "GoFiberDemo.net",
 		Views:        engine,
 	})
+	// 限流
+	app.Use(limiter.New())
 
 	// 日志中间件
 	app.Use(logger.New(logger.Config{
 		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${latency} ${path} \n",
 		TimeFormat: "2006-01-02 - 15:04:05",
 		Output:     logFile,
-	}), midst.Public)
+	}), midst.Public, compress.New(), favicon.New())
 
 	// 模板渲染样例
 	app.Get("/", Index)
