@@ -39,7 +39,7 @@ func Start() {
 		Format:     "[${time}] [${ip}:${port}] ${status} - ${method} ${latency} ${path} \n",
 		TimeFormat: "2006-01-02 - 15:04:05",
 		Output:     logFile,
-	}))
+	}), midst.Public)
 
 	// 模板渲染样例
 	app.Get("/", Index)

@@ -1,4 +1,4 @@
-package res
+package result
 
 import "github.com/EasyGolang/goTools/mRes"
 

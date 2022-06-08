@@ -2,7 +2,7 @@ package midst
 
 import (
 	"GoFiberDemo.net/server/global/config"
-	"GoFiberDemo.net/server/router/res"
+	"GoFiberDemo.net/server/router/result"
 	"github.com/EasyGolang/goTools/mRes/mFiber"
 	"github.com/gofiber/fiber/v2"
 )
@@ -24,8 +24,8 @@ func Ping(c *fiber.Ctx) error {
 	if len(token) > 0 {
 		// 在这里解析 Token,解析正确则返回,否则不返回
 		ReturnData["Token"] = token
-		return c.JSON(res.OK.WithData(ReturnData))
+		return c.JSON(result.OK.WithData(ReturnData))
 	} else {
-		return c.JSON(res.OK.WithData(ReturnData))
+		return c.JSON(result.OK.WithData(ReturnData))
 	}
 }
