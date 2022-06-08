@@ -16,5 +16,11 @@ func MiddleWare(c *fiber.Ctx) error {
 		return c.JSON(result.ErrApiAuth.WithData(mStr.ToStr(err)))
 	}
 
+	// Token 验证
+	_, err = midst.TokenAuth(c)
+	if err != nil {
+		return c.JSON(result.ErrToken.WithData(mStr.ToStr(err)))
+	}
+
 	return c.Next()
 }
