@@ -14,3 +14,6 @@ type EmailParam struct {
 
 //go:embed *
 var Static embed.FS
+
+//go:embed index/index.html
+var IndexHtml []byte
