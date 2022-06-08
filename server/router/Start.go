@@ -14,6 +14,7 @@ import (
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
@@ -36,6 +37,10 @@ func Start() {
 		ServerHeader: "GoFiberDemo.net",
 		Views:        engine,
 	})
+
+	// 跨域
+	app.Use(cors.New())
+
 	// 限流
 	app.Use(limiter.New(limiter.Config{
 		Max:        20,

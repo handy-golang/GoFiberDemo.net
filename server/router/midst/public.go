@@ -12,7 +12,6 @@ func Public(c *fiber.Ctx) error {
 }
 
 func AddHeader(c *fiber.Ctx) error {
-	c.Response().Header.Del("Data-Type")
-	c.Set("Data-Type", "GoFiberDemo.net")
+	c.Set("Data-Path", "GoFiberDemo.net")
 	return nil
 }
