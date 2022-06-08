@@ -1,8 +1,6 @@
 package midst
 
 import (
-	"GoFiberDemo.net/server/router/result"
-	"github.com/EasyGolang/goTools/mStr"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -10,10 +8,11 @@ func Public(c *fiber.Ctx) error {
 	// 添加访问头
 	AddHeader(c)
 
-	err := EncryptAuth(c)
-	if err != nil {
-		return c.JSON(result.ErrApiAuth.WithData(mStr.ToStr(err)))
-	}
+	// 接口授权验证
+	// err := EncryptAuth(c)
+	// if err != nil {
+	// 	return c.JSON(result.ErrApiAuth.WithData(mStr.ToStr(err)))
+	// }
 
 	return c.Next()
 }
