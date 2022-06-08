@@ -12,7 +12,7 @@ import (
 */
 
 func Router(api fiber.Router) {
-	r := api.Group("/private")
+	r := api.Group("/private", MiddleWare)
 
 	r.Get("/ping", midst.Ping)
 	r.Post("/ping", midst.Ping)
