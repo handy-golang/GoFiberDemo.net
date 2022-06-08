@@ -1,6 +1,7 @@
 package router
 
 import (
+	"net/http"
 	"os"
 	"time"
 
@@ -9,8 +10,10 @@ import (
 	"GoFiberDemo.net/server/router/midst"
 	"GoFiberDemo.net/server/router/private"
 	"GoFiberDemo.net/server/router/public"
+	"GoFiberDemo.net/server/tmpl"
 	"github.com/EasyGolang/goTools/mStr"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
@@ -29,10 +32,13 @@ func Start() {
 		Output:     logFile,
 	}))
 
-	app.Get("/", midst.Index("欢迎访问 GoFiberDemo.net 服务"))
+	// 静态文件服务器
+	app.Use("/", filesystem.New(filesystem.Config{
+		Root: http.FS(tmpl.Static),
+	}))
+
 	// api
 	api := app.Group("/api")
-	api.Get("/", midst.Index("欢迎访问 /api "))
 	api.Get("/ping", midst.Ping)
 	api.Post("/ping", midst.Ping)
 

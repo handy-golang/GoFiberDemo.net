@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+html {
+  overflow: auto;
+}
+
+html,
+body {
+  width: auto;
+  height: auto;
+  min-width: 280px;
+}
