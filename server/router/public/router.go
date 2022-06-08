@@ -10,7 +10,7 @@ import (
 */
 
 func Router(api fiber.Router) {
-	r := api.Group("/public")
+	r := api.Group("/public", MiddleWare)
 
 	r.Get("/ping", midst.Ping)
 	r.Post("/ping", midst.Ping)
