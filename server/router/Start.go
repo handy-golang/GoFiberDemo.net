@@ -73,10 +73,8 @@ func Start() {
 		Root: http.FS(tmpl.Static),
 	}))
 
-	app.Use(func(c *fiber.Ctx) error {
-		c.Set("Content-Type", "text/html")
-		return c.Send(tmpl.IndexHtml)
-	})
+	// 404
+	app.Use(NotFund)
 
 	listenHost := mStr.Join(":", config.AppEnv.Port)
 	global.Log.Println(mStr.Join(`启动服务: http://127.0.0.1`, listenHost))

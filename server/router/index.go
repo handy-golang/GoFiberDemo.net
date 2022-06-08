@@ -27,3 +27,15 @@ func Index(c *fiber.Ctx) error {
 		},
 	})
 }
+
+func NotFund(c *fiber.Ctx) error {
+	return c.Status(200).Render("404/404.tmpl", fiber.Map{
+		"title": "404 not found",
+	})
+}
+
+// 404 返回 index.html
+// app.Use(func(c *fiber.Ctx) error {
+// 	c.Set("Content-Type", "text/html")
+// 	return c.Send(tmpl.IndexHtml)
+// })
