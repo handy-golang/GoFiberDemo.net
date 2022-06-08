@@ -37,7 +37,10 @@ func Start() {
 		Views:        engine,
 	})
 	// 限流
-	app.Use(limiter.New())
+	app.Use(limiter.New(limiter.Config{
+		Max:        20,
+		Expiration: 20 * time.Second,
+	}))
 
 	// 日志中间件
 	app.Use(logger.New(logger.Config{
