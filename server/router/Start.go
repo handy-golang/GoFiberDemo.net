@@ -74,7 +74,11 @@ func Start() {
 	}))
 
 	// 404
-	app.Use(NotFund)
+	app.Use(func(c *fiber.Ctx) error {
+		return c.Status(200).Render("404/404.tmpl", fiber.Map{
+			"title": "404 not found",
+		})
+	})
 
 	listenHost := mStr.Join(":", config.AppEnv.Port)
 	global.Log.Println(mStr.Join(`启动服务: http://127.0.0.1`, listenHost))
